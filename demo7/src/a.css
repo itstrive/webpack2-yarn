@@ -1,0 +1,10 @@
+@import 'normalize.css';  /*这是通过  yarn add normalize.css 安装的第三方模块*/
+@import 'b.css'; /*这是自己的css*/
+body{
+	background: #ccc;
+}
+div{
+	width: 100px;
+	height: 100px;
+	background: red;
+}

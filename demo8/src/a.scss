@@ -1,0 +1,11 @@
+$color:#ccc;
+
+body{
+	background:$color;
+
+	li{
+		height:30px;
+		line-height: 30px;
+		border-bottom:1px dashed #000;
+	}
+}
