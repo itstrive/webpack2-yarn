@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "copy-webpack-plugin": "^4.0.1"
+  }
+}

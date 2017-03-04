@@ -115,24 +115,30 @@ demo5: webpack2的webpack-dev-server
 ```javascript
 const webpack = require('webpack');
 module.exports = {
-	context: __dirname + '/src',
 	entry: {
-		app: './app.js'
+		app: './index.js'
 	},
 	output: {
-		path: __dirname + '/dist/assets/',
+		path: __dirname + '/dist',
 		filename: '[name].bundle.js',
-		publicPath: '/assets',
-		library: 'myClassName'
+		publicPath: '/assets'
 	},
 	devServer: {
-		contentBase: __dirname + '/src'
-	}
-}
+		contentBase: __dirname + '/src',
+		hot: true,
+		inline: true,
+		open: true
+	},
+	plugins: [
+		new webpack.HotModuleReplacementPlugin()
+	]
+};
 
 //index.html 里面 script的src为: /assets/app.bundle.js
 //index.html需要放到 src目录下
 //script 标签中的 /assets 对应的是 output.publicPath 的值
+
+//需要在本地安装 webpack webpack-dev-server
 ```
 
 demo6: webpack2+babel
@@ -322,6 +328,48 @@ module.exports = {
 	]
 };
 //yarn add sass-loader node-sass
+```
+
+demo10: 自动生成html页面
+
+```javascript
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+module.exports = {
+	entry: {
+		app: './index.js'
+	},
+	output: {
+		path: __dirname + '/dist',
+		filename: '[name].bundle.js'
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			title: 'My-App',
+			filename: './index.html'
+		})
+	]
+};
+```
+
+demo11: copy-webpack-plugin
+
+```
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+module.exports = {
+	entry: {
+		app: './index.js'
+	},
+	output: {
+		path: __dirname + '/dist',
+		filename: '[name].bundle.js'
+	},
+	plugins: [
+		new CopyWebpackPlugin([{
+			from: './*.html',
+			to: ''
+		}])
+	]
+};
 ```
 
 
