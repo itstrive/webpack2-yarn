@@ -196,7 +196,7 @@ module.exports = {
 	}
 };
 //yarn add css-loader style-loader
-//这种方式就是引入普通的css文件，和webpack1写法一模一样
+//这种方式就是引入普通的css文件，和webpack1写法差不多
 ```
 
 demo7: webpack2+css module
@@ -353,7 +353,7 @@ module.exports = {
 
 demo11: copy-webpack-plugin
 
-```
+```javascript
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
 	entry: {
@@ -368,6 +368,57 @@ module.exports = {
 			from: './*.html',
 			to: ''
 		}])
+	]
+};
+```
+
+demo12: 图片 url-loader
+
+```javascript
+const webpack = require('webpack');
+module.exports = {
+	entry: {
+		app: './index.js'
+	},
+	output: {
+		path: __dirname + '/dist',
+		filename: '[name].bundle.js',
+		publicPath: ''
+	},
+	module: {
+		rules: [{
+			test: /\.css$/,
+			use: ['style-loader', {
+				loader: 'css-loader',
+				options: {
+					modules: true
+				}
+			}]
+		}, {
+			test: /\.(sass|scss)$/,
+			use: [
+				'style-loader',
+				'css-loader',
+				'sass-loader'
+			]
+		}, {
+			test: /\.(png|jpg)$/,
+			use: [{
+				loader: 'url-loader',
+				options: {
+					limit: 50000
+				}
+			}]
+		}]
+	},
+	devServer: {
+		contentBase: __dirname + '/src',
+		hot: true,
+		inline: true,
+		open: true
+	},
+	plugins: [
+		new webpack.HotModuleReplacementPlugin()
 	]
 };
 ```
