@@ -108,6 +108,8 @@ module.exports = {
 		}),
 	],
 }
+
+//new webpack.optimize.UglifyJsPlugin()  这个是专门用来压缩的插件，和 -p有点类似
 ```
 
 demo5: webpack2的webpack-dev-server
